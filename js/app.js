@@ -16,50 +16,53 @@ for (let i = 0; i < icons.length; i++) {
         card.classList.add('card'); //to each li add the css class of card
         card.innerHTML = `<i class = "${icons[i]}"</i>`;//loop through each card to an icon
         $('.deck').append(card);
-
-        //fucntion to click on cards and reveal them with css classes
-        card.addEventListener("click", function () {
-
-        if (openCard.length === 1 ) {
-
-            const currentCard = card;
-            const previousCard = openCard[0];
-
-            card.classList.add('open','show');
-            openCard.push(card);
-                // if two cards match
-                if (this.innerHTML === openCard[0].innerHTML) {
-                    currentCard.classList.add('match');
-                    previousCard.classList.add('match');
-                    // store all of the cards that are matched
-                    matchedCards.push(currentCard);
-                    matchedCards.push(previousCard);
-                    //resets cards after 2 clicks
-                    openCard = [];
-                    //check if game is over function called in here
-                    gameOver();
-                } else {
-                    //delay by 500ms
-                    setTimeout(function() {
-                        currentCard.classList.add('wrong');
-                        previousCard.classList.add('wrong');
-                        openCard = [];
-
-                    }, 400);
-
-                    openCard = [];
-                }
-
-        } else {
-
-            card.classList.add('open','show');
-            openCard.push(card);
-        }
-
-    });
+        //calling the click function to each card
+        click(card);
 
 }
 
+function click(card) {
+    card.addEventListener("click", function () {
+
+    if (openCard.length === 1 ) {
+
+        const currentCard = card;
+        const previousCard = openCard[0];
+
+        card.classList.add('open','show');
+        openCard.push(card);
+            // if two cards match
+            if (this.innerHTML === openCard[0].innerHTML) {
+                currentCard.classList.add('match');
+                previousCard.classList.add('match');
+                // store all of the cards that are matched
+                matchedCards.push(currentCard);
+                matchedCards.push(previousCard);
+                //resets cards after 2 clicks
+                openCard = [];
+                //check if game is over function called in here
+                gameOver();
+            } else {
+                //delay by 500ms
+                setTimeout(function() {
+                    currentCard.classList.add('wrong');
+                    previousCard.classList.add('wrong');
+                    openCard = [];
+
+                }, 400);
+
+                openCard = [];
+            }
+
+    } else {
+
+        card.classList.add('open','show');
+        openCard.push(card);
+    }
+
+});
+
+}
 
 //function to check if the game is over
 function gameOver() {
