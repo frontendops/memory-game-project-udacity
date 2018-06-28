@@ -10,17 +10,18 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 let openCard = [];
 let matchedCards = [];
 
-for (let i = 0; i < icons.length; i++) {
+function startGame(){
+    for (let i = 0; i < icons.length; i++) {
 
-        const card = document.createElement('li'); //create each card as an li//to each li add the css class of card
-        card.classList.add('card'); //to each li add the css class of card
-        card.innerHTML = `<i class = "${icons[i]}"</i>`;//loop through each card to an icon
-        $('.deck').append(card);
-        //calling the click function to each card
-        click(card);
+            const card = document.createElement('li'); //create each card as an li//to each li add the css class of card
+            card.classList.add('card'); //to each li add the css class of card
+            card.innerHTML = `<i class = "${icons[i]}"</i>`;//loop through each card to an icon
+            let $deck = $('.deck').append(card);
+            //calling the click function to each card
+            click(card);
 
+        }
 }
-
 function click(card) {
     card.addEventListener("click", function () {
 
@@ -32,28 +33,7 @@ function click(card) {
         card.classList.add('open','show');
         openCard.push(card);
             // if two cards match
-            if (this.innerHTML === openCard[0].innerHTML) {
-                currentCard.classList.add('match');
-                previousCard.classList.add('match');
-                // store all of the cards that are matched
-                matchedCards.push(currentCard);
-                matchedCards.push(previousCard);
-                //resets cards after 2 clicks
-                openCard = [];
-                //check if game is over function called in here
-                gameOver();
-            } else {
-                //delay by 500ms
-                setTimeout(function() {
-                    currentCard.classList.add('wrong');
-                    previousCard.classList.add('wrong');
-                    openCard = [];
-
-                }, 400);
-
-                openCard = [];
-            }
-
+        comparison(currentCard, previousCard);
     } else {
 
         card.classList.add('open','show');
@@ -62,6 +42,30 @@ function click(card) {
 
 });
 
+}
+// function to compare cards (passes current and previous card in argument)
+function comparison (currentCard, previousCard) {
+    if (currentCard.innerHTML === previousCard.innerHTML) {
+        currentCard.classList.add('match');
+        previousCard.classList.add('match');
+        // store all of the cards that are matched
+        matchedCards.push(currentCard);
+        matchedCards.push(previousCard);
+        //resets cards after 2 clicks
+        openCard = [];
+        //check if game is over function called in here
+        gameOver();
+    } else {
+        //delay by 500ms
+        setTimeout(function() {
+            currentCard.classList.add('wrong');
+            previousCard.classList.add('wrong');
+            openCard = [];
+
+        }, 400);
+
+
+    }
 }
 
 //function to check if the game is over
@@ -73,6 +77,13 @@ function gameOver() {
     }
 }
 
+$('.restart').on('click', function ($deck) {
+    $('.deck').html("");
+    matchedCards = [];
+    startGame();
+});
+
+startGame();
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
