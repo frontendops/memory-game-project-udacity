@@ -19,6 +19,7 @@ function startGame(){
             let $deck = $('.deck').append(card);
             //calling the click function to each card
             click(card);
+            shuffle(card);
 
         }
 }
@@ -83,6 +84,7 @@ $('.restart').on('click', function ($deck) {
     startGame();
 });
 
+//calling the game to start when the browser loads
 startGame();
 /*
  * Display the cards on the page
@@ -92,18 +94,18 @@ startGame();
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(card) {
+    var currentIndex = icons.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = icons[currentIndex];
+        icons[currentIndex] = icons[randomIndex];
+        icons[randomIndex] = temporaryValue;
     }
 
-    return array;
+    return card;
 }
 
 /*
