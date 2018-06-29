@@ -9,6 +9,7 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 
 let openCard = [];
 let matchedCards = [];
+let moves = 0;
 
 function startGame(){
     for (let i = 0; i < icons.length; i++) {
@@ -57,16 +58,17 @@ function comparison (currentCard, previousCard) {
         //check if game is over function called in here
         gameOver();
     } else {
+
+        currentCard.classList.add('wrong');
+        previousCard.classList.add('wrong');
         //delay by 500ms
         setTimeout(function() {
-            currentCard.classList.add('wrong');
-            previousCard.classList.add('wrong');
+            currentCard.classList.remove('open', 'show', 'wrong');
+            previousCard.classList.remove('open', 'show', 'wrong');
             openCard = [];
 
-        }, 400);
-
-
-    }
+        }, 1000);
+  }
 }
 
 //function to check if the game is over

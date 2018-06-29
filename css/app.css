@@ -79,6 +79,8 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    //disable click when matched
+    pointer-events: none;
 }
 /*test for wrong card*/
 .deck .card.wrong {
