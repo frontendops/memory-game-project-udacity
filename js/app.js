@@ -69,6 +69,7 @@ function comparison (currentCard, previousCard) {
 
         }, 1000);
   }
+    turns();
 }
 
 //function to check if the game is over
@@ -86,14 +87,13 @@ $('.restart').on('click', function ($deck) {
     startGame();
 });
 
+function turns() {
+    moves++
+    $('.moves').html(moves);
+}
+
 //calling the game to start when the browser loads
 startGame();
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(card) {

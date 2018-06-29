@@ -79,7 +79,7 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
-    //disable click when matched
+    /* disable card from being clicked when matched*/
     pointer-events: none;
 }
 /*test for wrong card*/
