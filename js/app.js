@@ -24,6 +24,8 @@ function startGame(){
 
         }
 }
+
+
 function click(card) {
     card.addEventListener("click", function () {
 
@@ -45,6 +47,7 @@ function click(card) {
 });
 
 }
+
 // function to compare cards (passes current and previous card in argument)
 function comparison (currentCard, previousCard) {
     if (currentCard.innerHTML === previousCard.innerHTML) {
@@ -65,11 +68,12 @@ function comparison (currentCard, previousCard) {
         setTimeout(function() {
             currentCard.classList.remove('open', 'show', 'wrong');
             previousCard.classList.remove('open', 'show', 'wrong');
-            openCard = [];
 
-        }, 1000);
+        }, 700);
+        openCard = [];
   }
     turns();
+    rank();
 }
 
 //function to check if the game is over
@@ -81,15 +85,38 @@ function gameOver() {
     }
 }
 
+//restart button
 $('.restart').on('click', function ($deck) {
     $('.deck').html("");
     matchedCards = [];
     startGame();
+    moves = [];
+    $('.moves').html(moves);
+    $('.stars').html(`<li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>`);
+
 });
 
 function turns() {
     moves++
     $('.moves').html(moves);
+
+}
+
+//ranking system
+function rank () {
+    if ( moves === 20) {
+        $('.stars').find(':first').remove();
+    } else if  (  moves === 24) {
+        $('.stars').find(':first').remove();
+    } else if ( moves === 28) {
+        $('.stars').find(':first').remove();
+    } else if ( moves === 36) {
+        $('.stars').find(':first').remove();
+    }
 }
 
 //calling the game to start when the browser loads
