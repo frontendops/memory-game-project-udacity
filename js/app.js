@@ -12,15 +12,15 @@ let matchedCards = [];
 let moves = 0;
 
 function startGame(){
-    for (let i = 0; i < icons.length; i++) {
+    let fullArray = shuffle(icons);
+    for (let i = 0; i < fullArray.length; i++) {
 
             const card = document.createElement('li'); //create each card as an li//to each li add the css class of card
             card.classList.add('card'); //to each li add the css class of card
-            card.innerHTML = `<i class = "${icons[i]}"</i>`;//loop through each card to an icon
+            card.innerHTML = `<i class = "${fullArray[i]}"</i>`;//loop through each card to an icon
             let $deck = $('.deck').append(card);
             //calling the click function to each card
             click(card);
-            shuffle(card);
 
         }
 }
@@ -108,13 +108,13 @@ function turns() {
 
 //ranking system
 function rank () {
-    if ( moves === 20) {
+    if ( moves === 18) {
         $('.stars').find(':first').remove();
-    } else if  (  moves === 24) {
+    } else if  (  moves === 22) {
         $('.stars').find(':first').remove();
-    } else if ( moves === 28) {
+    } else if ( moves === 26) {
         $('.stars').find(':first').remove();
-    } else if ( moves === 36) {
+    } else if ( moves === 32) {
         $('.stars').find(':first').remove();
     }
 }
@@ -123,18 +123,19 @@ function rank () {
 startGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(card) {
-    var currentIndex = icons.length, temporaryValue, randomIndex;
+function shuffle(array) {
+    let currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = icons[currentIndex];
-        icons[currentIndex] = icons[randomIndex];
-        icons[randomIndex] = temporaryValue;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
 
-    return card;
+    return array;
 }
 
 /*
