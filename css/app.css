@@ -69,6 +69,8 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    /* cant match card by itself */
+    pointer-events: none;
 }
 
 .deck .card.show {

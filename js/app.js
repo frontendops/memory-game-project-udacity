@@ -10,9 +10,10 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 let openCard = [];
 let matchedCards = [];
 let moves = 0;
+let fullArray = shuffle(icons);
+
 
 function startGame(){
-    let fullArray = shuffle(icons);
     for (let i = 0; i < fullArray.length; i++) {
 
             const card = document.createElement('li'); //create each card as an li//to each li add the css class of card
@@ -85,7 +86,7 @@ function gameOver() {
     }
 }
 
-//restart button
+//restart button function
 $('.restart').on('click', function ($deck) {
     $('.deck').html("");
     matchedCards = [];
@@ -100,6 +101,7 @@ $('.restart').on('click', function ($deck) {
 
 });
 
+// track the number of turns
 function turns() {
     moves++
     $('.moves').html(moves);
