@@ -117,3 +117,20 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+* Styles for winning popup
+*/
+
+.modul-container {
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+}
+
+.modul-container h1 {
+    font-family: 'futura';
+}
