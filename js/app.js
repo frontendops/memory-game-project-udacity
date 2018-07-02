@@ -23,7 +23,7 @@ function startGame(){
             const card = document.createElement('li'); //create each card as an li//to each li add the css class of card
             card.classList.add('card'); //to each li add the css class of card
             card.innerHTML = `<i class = "${fullArray[i]}"</i>`;//loop through each card to an icon
-            let $deck = $('.deck').append(card);
+            let $deck = $('.deck').append(card);//add cards to the deck
             //calling the click function to each card
             click(card);
 
@@ -161,7 +161,7 @@ function clearTimer(seconds){
         clearInterval(seconds);
     }
 }
-//function to restart in the modul
+//function to restart game in play again button in popup 
 $('.button').click(function(){
     $('.restart').trigger('click');
     $('.modulContainer').css('display', 'none');
