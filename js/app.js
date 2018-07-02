@@ -11,6 +11,10 @@ let openCard = [];
 let matchedCards = [];
 let moves = 0;
 let fullArray = shuffle(icons);
+let $timer = $('.timer');
+let second = 0;
+let currentSeconds;
+let stars = $('.stars');
 
 
 function startGame(){
@@ -24,9 +28,14 @@ function startGame(){
             click(card);
 
         }
+        //clearing timer when game is started
+        clearTimer(currentSeconds);
+        second = 0;
+	    $timer.text(`${second}`)
+        startTime();
 }
 
-
+//function for when a card is clicked
 function click(card) {
     card.addEventListener("click", function () {
 
@@ -80,15 +89,30 @@ function comparison (currentCard, previousCard) {
 //function to check if the game is over
 function gameOver() {
     if (matchedCards.length === icons.length) {
-        alert('you won!!');
-    } else {
+        $('.winningText').text(`it only took you ${moves} turns in ${second} seconds`);
+        $('.modulContainer').css('display', 'block');
+        //checking amount of moves to display what you scored
+        if ( moves < 18 ) {
+            $('.winningScore').text('You got 5 stars!!');
+        } else if ( moves >= 19 && moves <= 21) {
+            $('.winningScore').text('You got 4 stars!!');
+        } else if (moves >= 22 && moves <= 26) {
+            $('.winningScore').text('You got 3 stars!!');
+        } else if (moves >= 27 && moves <= 31) {
+            $('.winningScore').text('You got 2 stars!!');
+        } else if (moves >= 32 ) {
+            $('.winningScore').text('You got 1 star :()');
+        }
+//stops timer if the game ends !!
+        clearTimer(currentSeconds);
+        second = 0;
 
     }
 }
 
 //restart button function
 
-//$('.restart').on('click', function restart($deck) {
+
 $('.restart').click(function restart($deck) {
     $('.deck').html("");
     matchedCards = [];
@@ -124,13 +148,26 @@ function rank () {
     }
 }
 
+//timer function
+function startTime() {
+    currentSeconds = setInterval(function (){
+        $timer.text(`${second}`)
+        second++
+    },1000);
+}
+//restart timer
+function clearTimer(seconds){
+    if (seconds) {
+        clearInterval(seconds);
+    }
+}
 //function to restart in the modul
 $('.button').click(function(){
     $('.restart').trigger('click');
+    $('.modulContainer').css('display', 'none');
+
 })
 
-//calling the game to start when the browser loads
-startGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -147,3 +184,7 @@ function shuffle(array) {
 
     return array;
 }
+
+
+//calling the game to start when the browser loads
+startGame();
